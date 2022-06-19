@@ -1,5 +1,6 @@
 /* CLARIFICATIONS
-(1) This Stata do-file refers to the working paper "Does a productivity bonus pay off? The effects of teacher incentive pay on student achievement in Brazilian schools" and provides a complete overview of the commands used in this paper.
+(1) This Stata do-file refers to the working paper "Does a productivity bonus pay off? The effects of teacher incentive pay on student achievement in Brazilian schools" 
+and provides a complete overview of the commands used in this paper.
 Should you have any queries, please contact the author.
 
 (2) The GERES database is not publicly accessible. Permission requests should be submitted by the members of the project via GERES-homepage. 
@@ -15,14 +16,14 @@ See https://laedpucrio.wordpress.com/projetos/o-projeto-geres/
 * Importing Data from CD-ROM.
 ssc d usespss
 net from http://radyakin.org/transfer/usespss/beta
-usespss "C:\Users\...\Data\CD_Dados_GERES\BANCO_DADOS_GERES\Alunos\Informações e Proficiência\Informações_Gerais_GERES.sav", clear
-save "C:\Users\...\Data\CD_Dados_GERES\BANCO_DADOS_GERES\Alunos\Informações e Proficiência\DTA\Informações_Gerais_GERES.dta"
+usespss "C:\Users\...\Data\CD_Dados_GERES\BANCO_DADOS_GERES\Alunos\InformaÃ§Ãµes e ProficiÃªncia\InformaÃ§Ãµes_Gerais_GERES.sav", clear
+save "C:\Users\...\Data\CD_Dados_GERES\BANCO_DADOS_GERES\Alunos\InformaÃ§Ãµes e ProficiÃªncia\DTA\InformaÃ§Ãµes_Gerais_GERES.dta"
 
 ** Making the same for the other 5 single samples **
-* Informações_Gerais_GERES	--> General information about students
-* questionário_alunos(o5)	--> Proxies for learning motivation of students	
-* Questionário_escolas		--> Proxies for infrastructure of schools
-* Base_QuestProfessores		--> Proxies for (1) teacher´s skills, (2) infrastructure of class rooms, and (3) team work between teachers within the school
+* InformaÃ§Ãµes_Gerais_GERES	--> General information about students
+* questionÃ¡rio_alunos(o5)	--> Proxies for learning motivation of students	
+* QuestionÃ¡rio_escolas		--> Proxies for infrastructure of schools
+* Base_QuestProfessores		--> Proxies for (1) teacherÂ´s skills, (2) infrastructure of class rooms, and (3) team work between teachers within the school
 * Questionario_turma		--> Proxies for infrastructure of class rooms
 
 clear
@@ -36,7 +37,7 @@ clear matrix
 clear mata
 set matsize 10000
 set maxvar 32000
-use "C:\Users\...\Data\CD_Dados_GERES\DTA.Files\Informações_Gerais_GERES.dta", clear
+use "C:\Users\...\Data\CD_Dados_GERES\DTA.Files\InformaÃ§Ãµes_Gerais_GERES.dta", clear
 
 
 * Data focus: Students from Campinas
@@ -102,7 +103,7 @@ tab EduFath escopaip, missing
 
 * Importing proxies of students' learning motivation * 
 rename Munic_pio CityStud
-merge m:1 IDaluno using "C:\Users\...\Data\CD_Dados_GERES\DTA.Files\questionário_alunos-merged.dta", keepusing(gender race o5_q26 o5_q25 o5_q02) 
+merge m:1 IDaluno using "C:\Users\...\Data\CD_Dados_GERES\DTA.Files\questionÃ¡rio_alunos-merged.dta", keepusing(gender race o5_q26 o5_q25 o5_q02) 
 drop if _merge==2 // Only students from Campinas are relevant
 label variable _merge "Informacoes Gerais + Questionario Alunos"
 rename _merge merge1 
@@ -111,12 +112,12 @@ mdesc gender race o5_q26 o5_q25 o5_q02 nse Renda EduFath EducMoth
 
 * Importing proxies for the infrastructure of schools * 
 tab IDescola if IDescola==.a
-merge m:1 IDescola using "C:\Users\...\Data\CD_Dados_GERES\DTA.Files\Questionário_escolas.dta", keepusing(e029 e025 e024 e027 e023) // 251 schools are not from Campinas
+merge m:1 IDescola using "C:\Users\...\Data\CD_Dados_GERES\DTA.Files\QuestionÃ¡rio_escolas.dta", keepusing(e029 e025 e024 e027 e023) // 251 schools are not from Campinas
 drop if _merge==2 // Only schools from Campinas are relevant
 rename _merge merge2
 mdesc e029 e025 e024 e027 e023
 
-* Importing proxies for (1) teacher´s skills, (2) infrastructure of class rooms, and (3) team work between teachers within the school
+* Importing proxies for (1) teacherÂ´s skills, (2) infrastructure of class rooms, and (3) team work between teachers within the school
 merge m:1 IDturma using "C:\Users\...\Data\CD_Dados_GERES\DTA.Files\Base_QuestProfessores.dta", keepusing(q111 q100 q110 q108 q106 q105 q104 q036 q038 q037 q039 q044 q045 q046)
 drop if _merge==2 // Only IDturmas from Campinas are relevant
 label variable _merge "Base_Questionario Professores into Base-GERES"
@@ -126,7 +127,7 @@ mdesc q111 q100 q110 q108 q106 q105 q104 q036 q038 q037 q039 q044 q045 q046
 
 * Clearing the data
 tab e023, missing // a. means missing values.
- foreach var of varlist o5_q26 o5_q25 Renda EduFath EducMoth q111 q100 q110 q108 q106 q105 q104 q036 q038 q037 q039 q044 q045 q046 e029 e025 e024 e027 e023 { // "Dado ausente" or "não respondeu" = missing
+ foreach var of varlist o5_q26 o5_q25 Renda EduFath EducMoth q111 q100 q110 q108 q106 q105 q104 q036 q038 q037 q039 q044 q045 q046 e029 e025 e024 e027 e023 { // "Dado ausente" or "nÃ£o respondeu" = missing
 replace `var'=. if `var'==.a
 }
 
@@ -834,7 +835,7 @@ reshape wide profic_mat, i(wave) j(rede)
 graph twoway connected profic_mat2 profic_mat3 profic_mat4 wave, xaxis(1 2) sort ///
 xline(0.95 2.05 3.05 4.05 5.05, lstyle(grid) lpattern(shortdash) lcolor(red)) ///
 ytitle("Test Scores") xtitle("GERES-Waves") ylabel(0(50)300,format(%9.0f))  ///
-xlabel(3.9 "Law nº1017", axis(2)) xtitle("", axis(2)) ///
+xlabel(3.9 "Law nÂº1017", axis(2)) xtitle("", axis(2)) ///
 legend(label(3 "Private") label(2 "Municipal")label(1 "State")) ///
 msymbol(triangle square circle) legend(col(3)) ///
 text(297 1.3 "2005" 297 2.4 "2006" 297 3.4 "2007" 297 4.4 "2008", ///
@@ -847,7 +848,7 @@ reshape wide profic_por, i(wave) j(rede)
 graph twoway connected profic_por2 profic_por3 profic_por4 wave, xaxis(1 2) sort ///
 xline(0.95 2.05 3.05 4.05 5.05, lstyle(grid) lpattern(shortdash) lcolor(red)) ///
 ytitle("Test Scores") xtitle("GERES-Waves") ylabel(0(30)180,format(%9.0f))  ///
-xlabel(3.9 "Law nº1017", axis(2)) xtitle("", axis(2)) ///
+xlabel(3.9 "Law nÂº1017", axis(2)) xtitle("", axis(2)) ///
 legend(label(3 "Private") label(2 "Municipal")label(1 "State")) ///
 msymbol(triangle square circle) legend(col(3)) ///
 text(297 1.3 "2005" 297 2.4 "2006" 297 3.4 "2007" 297 4.4 "2008", ///
