@@ -18,11 +18,7 @@ global GRAPHS "D:\Data\Dropbox\PROMOTION\Projects\Homeschooling-Brazil\GRAPHS\\"
 global DATA "D:\Data\Dropbox\PROMOTION\Projects\Homeschooling-Brazil\DATA\DTA-Files\\"
 
 cd "D:\Data\Dropbox\PROMOTION\Projects\Homeschooling-Brazil\DO-FILES\"
-/*
-global TABLES "C:\Users\tharc\Dropbox\Homeschooling-Brazil\TABLES\\"
-global GRAPHS "C:\Users\tharc\Dropbox\Homeschooling-Brazil\GRAPHS\\"
-global DATA "C:\Users\tharc\Dropbox\Homeschooling-Brazil\DATA\DTA-Files\\"
-*/
+
 
 *do 0_read_panel
 
@@ -91,53 +87,6 @@ female_head educ_parents EAP_HH Formal_Head Formal_Part Home_Head Home_Part OffP
 DumSocDist_AHH SyntCov_HH Covid_MemHH MediCa_HH Hosp_HH if A006==1
 esttab using "$TABLES\\DESCRIPTIVES.rtf", cells("count mean(fmt(3)) sd (fmt(3)) min max") main(mean %12.0fc) not nostar unstack nomtitle nonumber nonote noobs nolabel varwidth(17) replace
 
-
-
-/* LATEX: Still in progress
-eststo clear
-estpost sum age race female rural LevelEduc SinglePar Workers BolsaFa SocDist COVID_Aid COVIDSym covid19 medicare hospital ///
-female_head educ_parents EAP_HH Formal_Head Formal_Part Home_Head Home_Part OffPand_Head OffPand_Part DumSocDist_Head DumSocDist_Part ///
-DumSocDist_AHH SyntCov_HH Covid_MemHH MediCa_HH Hosp_HH if A006==1
-est store table1
-
-esttab table1 using table.tex, replace ///
-title(Descriptive Statistics)       ///
-addnote("Notes: This table provides descriptive statistics for panel data structure in which each student i was accompanied during the five sample waves. " "Source: PNAD COVID-19.") ///
-refcat(age "\textbf{\emph{Student}}" female_head "\emph{Parents}" SyntCov_HH "\emph{Household}", nolabel) ///
-varlabels (age "Age" ///
-		   race_1 "White" race_2 "Black" race_3 "Yellow" race_4 "Brown" race_5 "Indigenous" race_6 "Ignored" ///
-		   female "Female" ///
-		   rural "Rural" ///
-		   LevelEduc_1 "Primary" LevelEduc_2 "Secondary" LevelEduc_3 "Tertiary" ///
-		   SinglePar "Single parent " ///
-		   Workers "Employed" ///
-		   BolsaFa "Beneficiary of Bolsa Familia" ///
-		   SocDist_1 "No restriction" SocDist_2 "Small restriction" SocDist_3 "Strong restriction" SocDist_4 "Stay only at home" ///
-		   COVID_Aid "Beneficiary of COVID19-Aid" ///
-		   COVIDSym_0 "No Symptoms" COVIDSym_1 "Mild Symptoms" COVIDSym_2 "Moderate Symptoms" COVIDSym_3 "Severe Symptoms" ///
-		   covid19 "Positive test" ///
-		   medicare "Seek medical care" ///
-		   hospital "Need Hospitalization" ///
-		   female_head "Head is female" ///
-		   educ_parents_1 "No Schooling" educ_parents_2 "Primary Incomplete" educ_parents_3 "Primary Complete" educ_parents_4 "Secondary Incomplete" educ_parents_5 "Secondary Complete" educ_parents_6 "Tertiary Incomplete" educ_parents_7 "Tertiary Complete" educ_parents_8 "Post-graduate Complete" ///
-  		   EAP_HH_0 "No one" EAP_HH_1 "One (Head or Partner)" EAP_HH_2 "Two (Head and Partner)" ///
-		   Formal_Head "Head working formal" ///
-		   Formal_Part "partner working formal" ///
-		   Home_Head "Head in homeoffice" ///
-		   Home_Part "Partner in homeoffice" ///
-		   OffPand_Head "Head in work absenteeism" ///
-		   OffPand_Part "Partner in work absenteeism" ///
-		   DumSocDist_Head "Head in social distancing" ///
-		   DumSocDist_Part "Partner in social distancing" ///
-		   DumSocDist_AHH "Other adult in social distancing" ///
-		   SyntCov_HH "Symptoms of COVID19" ///
-		   Covid_MemHH "Positive test" ///
-		   MediCa_HH "Seek medical care" ///
-		   Hosp_HH "Need hospitalization") ///
-		   collabels(\multicolumn{1}{c}{{Mean}} \multicolumn{1}{l}{{Std.Dev.}}) ///
-cells("count mean(fmt(3)) sd (fmt(3)) min max") main(mean %12.0fc) not nostar unstack nomtitle nonumber nonote noobs nolabel
-*/
-eststo clear
 
 *** SOCIOECONOMIC GRADIENT
 foreach outcome in $outcomes {
