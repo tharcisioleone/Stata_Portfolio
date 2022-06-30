@@ -21,7 +21,6 @@ cd "D:\Data\Dropbox\PROMOTION\Projects\Homeschooling-Brazil\DO-FILES\"
 
 
 *do 0_read_panel
-
 use "$DATA\Sample.dta" , clear
 
 * Data preparation
@@ -32,10 +31,10 @@ saveold "$DATA\Final_Sample.dta", replace version(12)
 use "$DATA\Final_Sample.dta" , clear
 
 * inverse hyperbolic sine transformation of income
-*replace Per_Ca_Inc2 = asinh(Per_Ca_Inc2+1)
+* replace Per_Ca_Inc2 = asinh(Per_Ca_Inc2+1)
 * check: https://onlinelibrary.wiley.com/doi/abs/10.1111/obes.12325
-*https://www.statalist.org/forums/forum/general-stata-discussion/general/1553489-inverse-hyperbolic-sinc-transformation
-*https://worthwhile.typepad.com/worthwhile_canadian_initi/2011/07/a-rant-on-inverse-hyperbolic-sine-transformations.html
+* https://www.statalist.org/forums/forum/general-stata-discussion/general/1553489-inverse-hyperbolic-sinc-transformation
+* https://worthwhile.typepad.com/worthwhile_canadian_initi/2011/07/a-rant-on-inverse-hyperbolic-sine-transformations.html
 
 /* Creating Macro */ 
 global childrenCV age i.female i.race i.UF i.SinglePar i.LevelEduc i.rural c.NumbChild017 i.V1013
