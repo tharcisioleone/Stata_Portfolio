@@ -510,6 +510,7 @@ graph export "$GRAPHS\shock_`outcome'_educparents.png" , hei(800) replace
 
 }
 
+
 /*
 reg ProvHoSch i.IncDecile2##i.IncSho10 $childrenCV i.BolsaFa i.EAP_HH i.Formal_HH i.Home_HH i.DumSocDist_HH $parentsHealth if educ_parents_high==0 [pweight=V1032] $cluster
 margins , at(IncDecile=(1(1)10)) over(IncSho10) 
