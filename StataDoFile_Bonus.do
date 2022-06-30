@@ -271,6 +271,7 @@ estadd local lagged "No"
 eststo LSDV_M4
 
 
+
 // Portuguese //
 /*(LSDV)*/ xtreg Zprofic_por DiD time treated wave_* IDescola_*, fe nonest i(IDaluno) vce(cluster IDturma)
 estadd local FE "Yes"
