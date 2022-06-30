@@ -21,9 +21,9 @@ save "C:\Users\...\Data\CD_Dados_GERES\BANCO_DADOS_GERES\Alunos\Informações e 
 
 ** Making the same for the other 5 single samples **
 * Informações_Gerais_GERES	--> General information about students
-* questionário_alunos(o5)	--> Proxies for learning motivation of students	
-* Questionário_escolas		--> Proxies for infrastructure of schools
-* Base_QuestProfessores		--> Proxies for (1) teacher´s skills, (2) infrastructure of class rooms, and (3) team work between teachers within the school
+* questionário_alunos(o5)		--> Proxies for learning motivation of students	
+* Questionário_escolas			--> Proxies for infrastructure of schools
+* Base_QuestProfessores			--> Proxies for (1) teacher´s skills, (2) infrastructure of class rooms, and (3) team work between teachers within the school
 * Questionario_turma		--> Proxies for infrastructure of class rooms
 
 clear
